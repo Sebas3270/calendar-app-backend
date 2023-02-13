@@ -11,7 +11,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func Connect() *mongo.Client {
+var MongoConnection *mongo.Client
+var UserCollection *mongo.Collection
+var EventsCollection *mongo.Collection
+
+func Connect() {
 
 	err := godotenv.Load()
 	if err != nil {
@@ -28,8 +32,7 @@ func Connect() *mongo.Client {
 
 	print("Connection established")
 
-	return client
+	MongoConnection = client
+	UserCollection = MongoConnection.Database("calendar_db").Collection("users")
+	EventsCollection = MongoConnection.Database("calendar_db").Collection("events")
 }
-
-var UserCollection = Connect().Database("calendar_db").Collection("users")
-var EventsCollection = Connect().Database("calendar_db").Collection("events")

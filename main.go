@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	"github.com/Sebas3270/calendar-app-backend/db"
 	"github.com/Sebas3270/calendar-app-backend/middlewares"
 	"github.com/Sebas3270/calendar-app-backend/services"
 	"github.com/gofiber/fiber/v2"
@@ -16,6 +17,8 @@ func main() {
 	if err != nil {
 		print("Error loading .env file")
 	}
+
+	db.Connect()
 
 	app := fiber.New()
 
